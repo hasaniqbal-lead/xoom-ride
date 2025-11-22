@@ -25,31 +25,33 @@ interface VehicleSelectorProps {
 
 const VehicleSelector = ({ selectedVehicle, onSelectVehicle }: VehicleSelectorProps) => {
   return (
-    <div className="grid grid-cols-2 gap-3">
-      {vehicles.map((vehicle) => (
-        <Card
-          key={vehicle.id}
-          onClick={() => onSelectVehicle(vehicle.id)}
-          className={cn(
-            "xoom-surface-elevated p-4 cursor-pointer transition-all hover:scale-105",
-            selectedVehicle === vehicle.id && "border-primary xoom-glow"
-          )}
-        >
-          <div className="flex flex-col items-center text-center gap-2">
-            <div className={cn(
-              "p-3 rounded-full bg-secondary",
-              selectedVehicle === vehicle.id && "bg-primary text-primary-foreground"
-            )}>
-              {vehicle.icon}
+    <div className="overflow-x-auto scrollbar-hide">
+      <div className="flex gap-3 pb-2">
+        {vehicles.map((vehicle) => (
+          <Card
+            key={vehicle.id}
+            onClick={() => onSelectVehicle(vehicle.id)}
+            className={cn(
+              "xoom-surface-elevated p-4 cursor-pointer transition-all hover:scale-105 flex-shrink-0 w-32",
+              selectedVehicle === vehicle.id && "border-primary xoom-glow"
+            )}
+          >
+            <div className="flex flex-col items-center text-center gap-2">
+              <div className={cn(
+                "p-3 rounded-full bg-secondary",
+                selectedVehicle === vehicle.id && "bg-primary text-primary-foreground"
+              )}>
+                {vehicle.icon}
+              </div>
+              <div>
+                <p className="font-semibold text-sm">{vehicle.name}</p>
+                <p className="text-xs text-muted-foreground">Up to {vehicle.capacity}</p>
+                <p className="text-primary font-bold mt-1">{vehicle.basePrice}+</p>
+              </div>
             </div>
-            <div>
-              <p className="font-semibold text-sm">{vehicle.name}</p>
-              <p className="text-xs text-muted-foreground">Up to {vehicle.capacity}</p>
-              <p className="text-primary font-bold mt-1">{vehicle.basePrice}+</p>
-            </div>
-          </div>
-        </Card>
-      ))}
+          </Card>
+        ))}
+      </div>
     </div>
   );
 };
