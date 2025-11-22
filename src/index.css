@@ -80,6 +80,15 @@ All colors MUST be HSL.
     box-shadow: 0 0 20px hsl(var(--xoom-yellow) / 0.3);
   }
 
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
   .xoom-surface {
     background: hsl(var(--xoom-surface));
     border: 1px solid hsl(var(--border));
