@@ -3,10 +3,29 @@ import { Menu } from "lucide-react";
 import RiderView from "@/components/RiderView";
 import DriverView from "@/components/DriverView";
 import ModeToggle from "@/components/ModeToggle";
+import DriverRegistration from "@/components/DriverRegistration";
+import UserRegistration from "@/components/UserRegistration";
 import { Button } from "@/components/ui/button";
+
+type ViewType = "main" | "driver-register" | "user-register";
 
 const Index = () => {
   const [mode, setMode] = useState<"rider" | "driver">("rider");
+  const [currentView, setCurrentView] = useState<ViewType>("main");
+  const [guestData, setGuestData] = useState<{ name: string; contact: string } | null>(null);
+
+  const handleGuestContinue = (name: string, contact: string) => {
+    setGuestData({ name, contact });
+    setCurrentView("main");
+  };
+
+  if (currentView === "driver-register") {
+    return <DriverRegistration onBack={() => setCurrentView("main")} />;
+  }
+
+  if (currentView === "user-register") {
+    return <UserRegistration onBack={() => setCurrentView("main")} onGuestContinue={handleGuestContinue} />;
+  }
 
   return (
     <div className="min-h-screen bg-background">
@@ -24,7 +43,27 @@ const Index = () => {
               </h1>
             </div>
 
-            <ModeToggle mode={mode} onModeChange={setMode} />
+            <div className="flex items-center gap-4">
+              {!guestData && (
+                <div className="flex gap-2">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => setCurrentView("user-register")}
+                  >
+                    Register as Rider
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => setCurrentView("driver-register")}
+                  >
+                    Register as Driver
+                  </Button>
+                </div>
+              )}
+              <ModeToggle mode={mode} onModeChange={setMode} />
+            </div>
           </div>
         </div>
       </header>

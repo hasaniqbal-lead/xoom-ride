@@ -8,30 +8,30 @@ interface ModeToggleProps {
 
 const ModeToggle = ({ mode, onModeChange }: ModeToggleProps) => {
   return (
-    <div className="xoom-surface rounded-full p-1 flex gap-1">
+    <div className="flex gap-2">
       <button
         onClick={() => onModeChange("rider")}
         className={cn(
-          "flex-1 flex items-center justify-center gap-2 px-6 py-2.5 rounded-full transition-all",
+          "p-2 rounded-full transition-all",
           mode === "rider" 
-            ? "xoom-gradient text-primary-foreground font-semibold" 
-            : "text-muted-foreground hover:text-foreground"
+            ? "xoom-gradient text-primary-foreground" 
+            : "bg-secondary/50 text-muted-foreground hover:text-foreground hover:bg-secondary"
         )}
+        title="Rider Mode"
       >
-        <User className="w-4 h-4" />
-        <span>Rider</span>
+        <User className="w-5 h-5" />
       </button>
       <button
         onClick={() => onModeChange("driver")}
         className={cn(
-          "flex-1 flex items-center justify-center gap-2 px-6 py-2.5 rounded-full transition-all",
+          "p-2 rounded-full transition-all",
           mode === "driver" 
-            ? "xoom-gradient text-primary-foreground font-semibold" 
-            : "text-muted-foreground hover:text-foreground"
+            ? "xoom-gradient text-primary-foreground" 
+            : "bg-secondary/50 text-muted-foreground hover:text-foreground hover:bg-secondary"
         )}
+        title="Driver Mode"
       >
-        <CarFront className="w-4 h-4" />
-        <span>Driver</span>
+        <CarFront className="w-5 h-5" />
       </button>
     </div>
   );
